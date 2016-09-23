@@ -2,7 +2,6 @@ var express = require('express');
 var path = require('path');
 var app = express();
 var routes = require('./server/routes');
-var expressBeautify = require('express-beautify');
 var bodyParser = require('body-parser')
 
 
