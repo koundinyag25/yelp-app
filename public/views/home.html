@@ -1,0 +1,27 @@
+<div style="margin: 20px;">
+<center>
+  <input type="text" ng-model="search.keyword" placeholder="search keyword">
+  <input type="text" ng-model="search.location" placeholder="location">
+  <button class="btn btn-primary" ng-click="search()">Search</button>
+</center>
+</div>
+
+<div class="row">
+   <div style="margin: 20px;">
+     <div class="col-md-3" ng-repeat="business in business track by $index">
+       <div class="card card-inverse card-success text-xs-center"  ng-class="{true:'activeClass'}[activeBtn == $index]">
+              <center>
+                <img  class="card-img-top" style="width: 200px; margin-top: 10px"  src="{{business.image_url}}"/>
+                <div class="card-block">
+
+                  <h4 class="card-title">{{business.name}}</h4>
+                  <h5 class="card-text">Phone: {{business.phone}}</h5>
+
+                </div>
+              </center>
+          </div>
+     </div>
+   </div>
+</div>
+
+{{message}}
