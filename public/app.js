@@ -29,4 +29,8 @@ myApp.controller("HomeController", ['$scope','$http','$rootScope',function($scop
         });
       }
 
+      $scope.getreviews= function(){
+        
+      }
+
 }]);
