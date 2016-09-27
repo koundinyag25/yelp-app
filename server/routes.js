@@ -15,7 +15,7 @@ var yelp = new Yelp({
 router.get('/business',(req,res,next)=>{
   var query = req.query;
   console.log(query);
-  yelp.search({ term: query.term , location: query.location })
+  yelp.search({ term: query.term , location: query.location, category_filter: 'movietheaters' })
   .then((data)=>{
     res.send(data);
   })

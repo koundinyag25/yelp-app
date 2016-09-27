@@ -1,12 +1,11 @@
-angular.module('myApp',['ui.router','myApp.services'])
+angular.module('myApp',['ui.router','myApp.services','ngMaterial','leaflet-directive'])
 .config(function($stateProvider,$urlRouterProvider,$locationProvider){
 
         $stateProvider
         .state('home',{
           url:'/',
-          templateUrl: 'views/home.html',
-          controller: 'HomeCtrl',
-          controllerAs: "$ctrl"
+          templateUrl: 'views/home1.html',
+          controller: 'HomeCtrl'
         });
 
         $locationProvider.html5Mode({

@@ -1,0 +1,56 @@
+
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <md-input-conatiner type='text'>
+       <input type="text" placeholder="search keyword" ng-model="search.keyword">
+      </md-input-container>
+      <md-input-conatiner type='text'>
+       <input type="text" placeholder="search location" ng-model="search.location">
+      </md-input-container>
+      <md-button ng-click="search()">search</md-button>
+    </div>
+  </md-toolbar>
+  <div layout="row" ng-show="!emptyArray">
+    <md-sidenav layout="column" md-component-id="left" md-is-locked-open="true" class="md-sidenav-left md-whiteframe-z2">
+        <md-card ng-repeat="item in business">
+          <div layout="row">
+            <img class="md-card-image" style="width:100px; height:100px;" src={{item.image_url}} alt="">
+            <md-card-content layout="column">
+              <span class="md-subhead description">{{item.name}}</span>
+              <span class="md-subhead description">Phone:{{item.phone}}</span>
+              <span calss="md-subhead"><p>Rating: {{item.rating}} / 5</p></span>
+            </md-card-content>
+          </div>
+
+        </md-card>
+        <md-divider md-inset ng-if="!$last"></md-divider>
+    </md-sidenav>
+    <md-content id="content" flex>
+        <md-card flexc-gt-sm="90" flex-gt-md="80">
+          <md-card-content>
+            <md-item layout="column">
+              <md-item-content layout="row">
+                <div class="md-tile-content">
+                   <h3>{{business[0].snippet_text}}</h3>
+                   <h3>{{business[0].sinppet_text}}</h3>
+                   <h4>{{business[0].region}}</h4>
+                   <p>
+                     {{business[0].location.address[0]}},
+                     {{business[0].location.city}},
+                     {{business[0].location.country_code}}
+                   </p>
+                 </div>
+                <div class="md-tile-left inset" hide-sm>
+                  <img src={{business[0].image_url}} alt="" class="pull-right">
+                </div>
+
+
+              </md-item-content>
+              <md-divider></md-divider>
+              <leaflet id="map" width="100%" height="480px"></leaflet>
+            </div>
+        </md-item>
+          </md-card-content>
+        </md-card>
+    </md-content>
+  </div>
