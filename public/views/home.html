@@ -35,7 +35,10 @@
                     <div class="md-media-sm card-media" style="background-image:url({{business[0].image_url}})"></div>
                 </md-card-title-media>
             </md-card-title>
-            <leaflet defaults="defaults" center="center" height="420px" width="100%"></leaflet>
+            <div id="map">
+              <leaflet id="map" defaults="defaults" center="center" height="420px" width="100%"></leaflet>
+            </div>
+
             <md-card-actions layout="row" layout-align="end center">
                 <md-button class="md-raised" md-colors="::{backgroundColor: 'second-primary'}">Previous</md-button>
                 <md-button class="md-raised" md-colors="::{backgroundColor: 'second-primary'}">Next</md-button>

@@ -2,6 +2,9 @@ angular.module('myApp').controller("HomeCtrl", ['$scope', '$http', '$rootScope',
     function($scope, $http, $rootScope, myAppServices, leafletData, $timeout) {
         $scope.business = [];
         $scope.emptyArray = true;
+        leafletData.getMap().then(function(map){
+          map.invalidateSize(false);
+        });
         $scope.center = {
           lat: -33.8830,
               lng: 151.2166,
