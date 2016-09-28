@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon index.js"
   },
   "author": "koundinya",
   "license": "ISC",
@@ -15,6 +15,8 @@
     "angular-aria": "^1.5.8",
     "angular-leaflet-directive": "^0.10.0",
     "angular-material": "^1.1.1",
+    "angular-messages": "^1.5.8",
+    "angular-simple-logger": "^0.1.7",
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "ui-leaflet": "^1.0.2",

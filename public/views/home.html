@@ -1,38 +1,46 @@
-<div class="navbar">
-  <div class="row" style="margin: 20px;">
-      <div class='col-md-4'><h3>Yelp sample app</h3></div>
-      <div class='col-md-4'>
-        <div class="row">
-          <div class='col-sm-6'>
-              <input type="text" class="form-control" ng-model="search.keyword" placeholder="Search Keyword">
-          </div>
-          <div class='col-sm-5'>
-              <input type="text" class="form-control" ng-model="search.location" placeholder="Search Location">
-          </div>
-          <div class='col-sm-1'>
-            <button class="btn btn-primary" ng-click="search()">Search</button>
-          </div>
-        </div>
-      </div>
-      <div class='col-md-4'></div>
-  </div>
-
-</div>
-
-  <div class="row">
-     <div style="margin: 20px;">
-       <div class="col-md-4" ng-repeat="business in business track by $index">
-         <div class="card card-inverse card-success text-xs-center"  ng-class="{true:'activeClass'}[activeBtn == $index]">
-                <center>
-                  <img  class="card-img-top" style="width: 200px; margin-top: 10px"  src="{{business.image_url}}"/>
-                  <div class="card-block">
-
-                    <h5 class="card-title">{{business.name}}</h4>
-                    <p class="card-text">Phone: {{business.phone}}</p>
-                    <div class="btn btn-secondary">Rating: {{business.rating}} / 5</div>
-                  </div>
-                </center>
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <md-input-conatiner>
+            <input placeholder="enter keyword" ng-model="search.keyword" ng-required>
+            </md-input-container>
+            <md-input-conatiner>
+                <input placeholder="enter location" ng-model="search.location" ng-required="true">
+                </md-input-container>
+                <md-button md-theme="second" md-colors="::{backgroundColor: 'second-primary-500'}" ng-click="search()">search</md-button>
+    </div>
+</md-toolbar>
+<div layout="row" ng-if="!emptyArray">
+    <md-sidenav layout="column" md-component-id="left" md-is-locked-open="true" class="md-sidenav-left md-whiteframe-z2" md-colors="::{backgroundColor: 'second-primary-100'}">
+        <md-card ng-repeat="item in business" md-theme="third" md-theme-watch md-colors="::{backgroundColor: 'default-primary-200'}">
+            <div layout="row">
+                <img class="md-card-image" style="width:100px; height:100px;" src={{item.image_url}} alt="">
+                <md-card-content layout="column">
+                    <span class="md-subhead description">{{item.name}}</span>
+                    <span class="md-subhead description">Phone:{{item.phone}}</span>
+                    <span calss="md-subhead"><p>Rating: {{item.rating}} / 5</p></span>
+                </md-card-content>
             </div>
-       </div>
-     </div>
-  </div>
+
+        </md-card>
+        <md-divider md-inset ng-if="!$last"></md-divider>
+    </md-sidenav>
+    <md-content id="content" md-colors="::{backgroundColor: 'second-primary-300'}" flex>
+        <md-card md-theme="default" md-theme-watch md-colors="::{backgroundColor: 'default-primary-800'}">
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline">{{business[0].name}}</span>
+                    <span class="md-subhead">{{business[0].address[0]}}</span>
+                </md-card-title-text>
+                <md-card-title-media>
+                    <div class="md-media-sm card-media" style="background-image:url({{business[0].image_url}})"></div>
+                </md-card-title-media>
+            </md-card-title>
+            <leaflet defaults="defaults" center="center" height="420px" width="100%"></leaflet>
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-raised" md-colors="::{backgroundColor: 'second-primary'}">Previous</md-button>
+                <md-button class="md-raised" md-colors="::{backgroundColor: 'second-primary'}">Next</md-button>
+            </md-card-actions>
+        </md-card>
+
+    </md-content>
+</div>
