@@ -11,7 +11,7 @@
 </md-toolbar>
 <div layout="row" ng-if="!emptyArray">
     <md-sidenav layout="column" md-component-id="left" md-is-locked-open="true" class="md-sidenav-left md-whiteframe-z2" md-colors="::{backgroundColor: 'second-primary-100'}">
-        <md-card ng-repeat="item in business" md-theme="third" md-theme-watch md-colors="::{backgroundColor: 'default-primary-200'}">
+        <md-card ng-repeat="item in business track by $index" md-theme="third" md-theme-watch md-colors="::{backgroundColor: 'default-primary-200'}" ng-click="selectItem($index)">
             <div layout="row">
                 <img class="md-card-image" style="width:100px; height:100px;" src={{item.image_url}} alt="">
                 <md-card-content layout="column">
@@ -28,14 +28,15 @@
         <md-card md-theme="default" md-theme-watch md-colors="::{backgroundColor: 'default-primary-800'}">
             <md-card-title>
                 <md-card-title-text>
-                    <span class="md-headline">{{business[0].name}}</span>
-                    <span class="md-subhead">{{business[0].address[0]}}</span>
+                    <span class="md-headline">{{name}}</span>
+                    <span class="md-subhead" style="color: white; ">{{address}}</span>
+                      <span class="md-subhead" style="color: white; ">{{city}}</span>
                 </md-card-title-text>
                 <md-card-title-media>
-                    <div class="md-media-sm card-media" style="background-image:url({{business[0].image_url}})"></div>
+                    <div class="md-media-sm card-media" style="background-image:url({{image}})"></div>
                 </md-card-title-media>
             </md-card-title>
-            <leaflet id="map" defaults="defaults" center="center"></leaflet>
+            <leaflet id="map" markers="markers" defaults="defaults" center="center"></leaflet>
             <md-card-actions layout="row" layout-align="end center">
                 <md-button class="md-raised" md-colors="::{backgroundColor: 'second-primary'}">Previous</md-button>
                 <md-button class="md-raised" md-colors="::{backgroundColor: 'second-primary'}">Next</md-button>
