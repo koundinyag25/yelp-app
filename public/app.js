@@ -9,7 +9,14 @@ angular.module('myApp', ['ui.router', 'myApp.services', 'ngMaterial', 'nemLoggin
                 'default': 'A200'
             });
 
+            $mdThemingProvider.theme('second').primaryPalette('grey', {
+                'default': '600',
+                'hue-2': '500',
+                'hue-3': '50'
 
+            }).accentPalette('green', {
+                'default': 'A200'
+            });
 
         $stateProvider
             .state('home', {

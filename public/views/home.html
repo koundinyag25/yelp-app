@@ -1,5 +1,5 @@
 <div layout="row">
-    <md-sidenav  layout="column" md-component-id="left" md-is-locked-open="true" class="md-sidenav-left md-whiteframe-z2" md-colors="::{backgroundColor: 'second-primary-100'}">
+    <md-sidenav  layout="column" md-component-id="left" md-is-locked-open="true" class="md-sidenav-left md-whiteframe-z2" >
 
           <header style="display:block; z-index:2">
             <form layout-padding>
@@ -21,10 +21,10 @@
 
 <md-divider></md-divider>
         <div>
-          <md-content  style="height: 400px;" md-scroll flex>
+          <md-content  style="height:58%;" md-scroll flex>
             <md-list>
                 <md-list-item ng-repeat="item in business track by $index">
-                    <md-card md-theme="third" md-theme-watch md-colors="::{backgroundColor: 'default-primary-200'}" ng-click="selectItem($index)">
+                    <md-card md-theme="second" md-theme-watch md-colors="::{backgroundColor: 'second-primary-100'}" ng-click="selectItem($index)">
                         <div layout="row">
                             <img class="md-card-image" style="width:100px; height:100px;" src={{item.image_url}} alt="">
                             <md-card-content layout="column">
@@ -60,8 +60,8 @@
                 </md-card-title>
                 <leaflet id="map" markers="markers" defaults="defaults" center="center"></leaflet>
                 <md-card-actions layout="row" layout-align="end center">
-                    <md-button class="md-raised" md-colors="::{backgroundColor: 'second-primary'}">Previous</md-button>
-                    <md-button class="md-raised" md-colors="::{backgroundColor: 'second-primary'}">Next</md-button>
+                    <md-button class="md-raised" >Previous</md-button>
+                    <md-button class="md-raised" >Next</md-button>
                 </md-card-actions>
             </md-card>
 
