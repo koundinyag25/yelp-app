@@ -6,12 +6,12 @@
               <div layout-gt-xs="column">
               <md-input-container class="md-block" flex-gt-xs>
                 <label>Search Term</label>
-                <input ng-model="search.keyword" >
+                <input ng-model="search.keyword" placeholder="Food,Movies etc">
               </md-input-container>
 
               <md-input-container>
                 <label>Location</label>
-                <input ng-model="search.location" />
+                <input ng-model="search.location" placeholder="Boston,Chicago etc"/>
               </md-input-container>
               <md-button class="md-raised" md-theme="default" md-colors="::{backgroundColor: 'default-primary-500'}" ng-click="search()">search</md-button>
               </div>
