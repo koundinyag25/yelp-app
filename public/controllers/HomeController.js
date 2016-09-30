@@ -1,6 +1,23 @@
 angular.module('myApp').controller("HomeCtrl", ['$scope', '$http', '$rootScope', 'myAppServices', 'leafletData', 'nemSimpleLogger',
     function($scope, $http, $rootScope, myAppServices, leafletData, $timeout) {
         $scope.business = [];
+        $scope.categoryList = [
+          { name:'Active Life',
+            value:'active'},
+            {
+              name: 'Arts & Entertainment',
+              value: 'arts'
+            },
+            {
+              name : 'Cinema',
+              value: 'movietheaters'
+            },
+            {
+              name: 'food',
+              value: 'food'
+            }
+
+        ];
         $scope.emptyArray = true;
         $scope.name='';
         $scope.address ='';
@@ -21,7 +38,8 @@ angular.module('myApp').controller("HomeCtrl", ['$scope', '$http', '$rootScope',
 
 
         $scope.search = function() {
-            myAppServices.search($scope.search.keyword, $scope.search.location).then(function(data) {
+          console.log('category',$scope.category.value);
+            myAppServices.search($scope.search.keyword, $scope.search.location,$scope.category.value).then(function(data) {
                 $scope.business = data.data.businesses;
                 $scope.name = $scope.business[0].name;
                 $scope.address = $scope.business[0].location.display_address[0]+','+$scope.business[0].location.display_address[1] ;

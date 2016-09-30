@@ -13,6 +13,14 @@
                 <label>Location</label>
                 <input ng-model="search.location" placeholder="Boston,Chicago etc"/>
               </md-input-container>
+              <md-input-container>
+          <label>select category  (Active life, Arts and Entertainment, )</label>
+          <md-select ng-model="category.value">
+            <md-option ng-repeat="category in categoryList track by $index" ng-value="category.value" placeholde="boop" >
+              {{category.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
               <md-button class="md-raised" md-theme="default" md-colors="::{backgroundColor: 'default-primary-500'}" ng-click="search()">search</md-button>
               </div>
             </form>
@@ -21,7 +29,7 @@
 
 <md-divider></md-divider>
         <div>
-          <md-content  style="height:58%;" md-scroll flex>
+          <md-content  style="height:320px;;" md-scroll flex>
             <md-list>
                 <md-list-item ng-repeat="item in business track by $index">
                     <md-card md-theme="second" md-theme-watch md-colors="::{backgroundColor: 'second-primary-100'}" ng-click="selectItem($index)">
