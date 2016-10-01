@@ -1,68 +1,93 @@
-angular.module('myApp').controller("HomeCtrl", ['$scope', '$http', '$rootScope', 'myAppServices', 'leafletData', 'nemSimpleLogger',
-    function($scope, $http, $rootScope, myAppServices, leafletData, $timeout) {
+angular.module('myApp').controller("HomeCtrl", ['$scope', '$http', '$rootScope', 'myAppServices', 'leafletData', 'nemSimpleLogger', 'geolocation','leafletBoundsHelpers',
+    function($scope, $http, $rootScope, myAppServices, leafletData, $timeout, geolocation,leafletBoundsHelpers) {
         $scope.business = [];
-        $scope.categoryList = [
-          { name:'Active Life',
-            value:'active'},
-            {
-              name: 'Arts & Entertainment',
-              value: 'arts'
-            },
-            {
-              name : 'Cinema',
-              value: 'movietheaters'
-            },
-            {
-              name: 'food',
-              value: 'food'
+        $scope.categoryList = [{
+                name: 'Active Life',
+                value: 'active'
+            }, {
+                name: 'Arts & Entertainment',
+                value: 'arts'
+            }, {
+                name: 'Cinema',
+                value: 'movietheaters'
+            }, {
+                name: 'Food',
+                value: 'food'
             }
 
         ];
         $scope.emptyArray = true;
-        $scope.name='';
-        $scope.address ='';
-        $scope.image='';
+        $scope.name = '';
+        $scope.address = '';
+        $scope.image = '';
+        var currentLocation = {};
+        var current = {
+            lat: 0,
+            lng: 0,
+            message: ''
+        };
+        geolocation.getLocation().then(function(data) {
+            currentLocation = data.coords;
+            current = {
+                lat: currentLocation.latitude,
+                lng: currentLocation.longitude,
+                message: 'you are here'
+            };
+            return current;
+        });
+
+
+
         leafletData.getMap().then(function(map) {
             map.invalidateSize(false);
         });
-        $scope.markers = { };
+        $scope.markers = {};
         $scope.center = {
             lat: 0,
             lng: 0,
             message: ''
-         };
+        };
         $scope.defaults = {
             scrollWheelZoom: false
-          };
+        };
 
 
 
         $scope.search = function() {
-          console.log('category',$scope.category.value);
-            myAppServices.search($scope.search.keyword, $scope.search.location,$scope.category.value).then(function(data) {
+            myAppServices.search($scope.search.keyword, $scope.search.location, $scope.category.value).then(function(data) {
                 $scope.business = data.data.businesses;
+                console.log('category', data.data.businesses[0]);
                 $scope.name = $scope.business[0].name;
-                $scope.address = $scope.business[0].location.display_address[0]+','+$scope.business[0].location.display_address[1] ;
+                $scope.address = $scope.business[0].location.display_address[0] + ',' + $scope.business[0].location.display_address[1];
                 $scope.image = $scope.business[0].image_url;
-                $scope.center={
+                $scope.center = {
                     lat: $scope.business[0].location.coordinate.latitude,
                     lng: $scope.business[0].location.coordinate.longitude,
-                    zoom: 20
-                  };
+                    zoom: 6
+
+                };
                 $scope.markers = {
-                  center: {
-                    lat: $scope.business[0].location.coordinate.latitude,
-                    lng: $scope.business[0].location.coordinate.longitude,
-                    message: $scope.business[0].name + '</br>' + 'Address:'+ $scope.business[0].location.address[0]+', '+$scope.business[0].location.city+ ', '+ $scope.business[0].location.postal_code,
-                    focus: true,
-                    draggable: false
-                  }
+                    center: {
+                        lat: $scope.business[0].location.coordinate.latitude,
+                        lng: $scope.business[0].location.coordinate.longitude,
+                        message: $scope.business[0].name + '</br>' + 'Address:' + $scope.business[0].location.address[0] + ', ' + $scope.business[0].location.city + ', ' + $scope.business[0].location.postal_code,
+                        focus: true,
+                        draggable: false
+                    },
+                    current: {
+                        lat: currentLocation.latitude,
+                        lng: currentLocation.longitude,
+                        message: "You are here"
+                    }
                 };
 
-                  console.log($scope.center);
-                  console.log($scope.markers);
-                  $scope.search.keyword = '';
-                  $scope.search.location = '';
+                var bounds = leafletBoundsHelpers.createBoundsFromArray([
+                    [$scope.business[0].location.coordinate.latitude,$scope.business[0].location.coordinate.longitude],
+                    [$scope.markers.current.lat, $scope.markers.current.lng]
+                ]);
+
+                $scope.search.keyword = '';
+                $scope.search.location = '';
                 if ($scope.business.length > 0) {
                     return $scope.emptyArray = false;
                 }
@@ -74,29 +99,32 @@ angular.module('myApp').controller("HomeCtrl", ['$scope', '$http', '$rootScope',
 
         }
 
-        $scope.selectItem = function(index){
-          console.log($scope.business);
-            console.log(index);
-            console.log('the scope',$scope.business[index]);
+        $scope.selectItem = function(index) {
 
-            $scope.center={
+
+            $scope.center = {
                 lat: $scope.business[index].location.coordinate.latitude,
                 lng: $scope.business[index].location.coordinate.longitude,
-                zoom: 15
-              };
+                zoom : 4
+            };
             $scope.markers = {
-              center: {
-                lat: $scope.business[index].location.coordinate.latitude,
-                lng: $scope.business[index].location.coordinate.longitude,
-                message: $scope.business[index].name + '</br>' + 'Address:'+ $scope.business[index].location.address[0]+', '+$scope.business[index].location.city+ ', '+ $scope.business[index].location.postal_code,
-                focus: true,
-                draggable: false
-              }
+                center: {
+                    lat: $scope.business[index].location.coordinate.latitude,
+                    lng: $scope.business[index].location.coordinate.longitude,
+                    message: $scope.business[index].name + '</br>' + 'Address:' + $scope.business[index].location.address[0] + ', ' + $scope.business[index].location.city + ', ' + $scope.business[index].location.postal_code,
+                    focus: true,
+                    draggable: false
+                },
+                current: {
+                    lat: currentLocation.latitude,
+                    lng: currentLocation.longitude,
+                    message: 'You are here!'
+                }
             };
 
 
             $scope.name = $scope.business[index].name;
-            $scope.address = $scope.business[index].location.display_address[0]+','+$scope.business[index].location.display_address[1];
+            $scope.address = $scope.business[index].location.display_address[0] + ',' + $scope.business[index].location.display_address[1];
             $scope.image = $scope.business[index].image_url;
         }
 
