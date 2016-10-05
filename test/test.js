@@ -1,9 +1,8 @@
 describe('test',function(){
   var scope = {};
   var ctrl;
-
   beforeEach(angular.mock.module('myApp'));
-  beforeEach(angular.mock.inject(function($controller){
+  beforeEach(angular.mock.inject(function($controller,$injector){
     ctrl = $controller('HomeCtrl',{ $scope : scope});
   }));
  it('should initilazie module',function(){
