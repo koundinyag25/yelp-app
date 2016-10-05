@@ -1,5 +1,7 @@
-angular.module('myApp').controller("HomeCtrl", ['$scope', '$http', '$rootScope', 'myAppServices', 'leafletData', 'nemSimpleLogger', 'geolocation','leafletBoundsHelpers',
-    function($scope, $http, $rootScope, myAppServices, leafletData, $timeout, geolocation,leafletBoundsHelpers) {
+
+angular.module('myApp').controller("HomeCtrl", ['$scope', '$http', '$rootScope', 'myAppServices', 'leafletData', 'nemSimpleLogger','geolocation',
+    function($scope, $http, $rootScope, myAppServices, leafletData, $timeout,geolocation) {
+        $scope.title = "yelp-based-app";
         $scope.business = [];
         $scope.categoryList = [{
                 name: 'Active Life',
@@ -54,9 +56,8 @@ angular.module('myApp').controller("HomeCtrl", ['$scope', '$http', '$rootScope',
 
 
         $scope.search = function() {
-            myAppServices.search($scope.search.keyword, $scope.search.location, $scope.category.value).then(function(data) {
+            myAppServices.search($scope.search.keyword, $scope.search.location).then(function(data) {
                 $scope.business = data.data.businesses;
-                console.log('category', data.data.businesses[0]);
                 $scope.name = $scope.business[0].name;
                 $scope.address = $scope.business[0].location.display_address[0] + ',' + $scope.business[0].location.display_address[1];
                 $scope.image = $scope.business[0].image_url;
@@ -81,17 +82,12 @@ angular.module('myApp').controller("HomeCtrl", ['$scope', '$http', '$rootScope',
                     }
                 };
 
-                var bounds = leafletBoundsHelpers.createBoundsFromArray([
-                    [$scope.business[0].location.coordinate.latitude,$scope.business[0].location.coordinate.longitude],
-                    [$scope.markers.current.lat, $scope.markers.current.lng]
-                ]);
-
-                $scope.search.keyword = '';
-                $scope.search.location = '';
+                  $scope.search.keyword = '';
+                  $scope.search.location = '';
                 if ($scope.business.length > 0) {
                     return $scope.emptyArray = false;
                 }
-
+              return $scope.business;
 
             }).catch(function(error) {
                 return error;
