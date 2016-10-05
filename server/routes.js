@@ -13,17 +13,16 @@ var yelp = new Yelp({
 
 router.get('/business', (req, res, next) => {
     var query = req.query;
-    console.log(query);
+    console.log('boop',query);
     yelp.search({
             term: query.term,
             location: query.location,
-            category_filter: 'movietheaters'
+            category_filter: query.category_filter
         })
         .then((data) => {
             res.send(data);
         })
-        .catch(console.error);
-
+        .catch((error)=> console.error);
 });
 
 

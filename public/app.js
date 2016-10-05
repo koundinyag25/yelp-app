@@ -1,4 +1,4 @@
-angular.module('myApp', ['ui.router', 'myApp.services', 'ngMaterial', 'nemLogging', 'ui-leaflet'])
+angular.module('myApp', ['ui.router', 'myApp.services', 'ngMaterial', 'nemLogging', 'ui-leaflet','geolocation'])
     .config(function($stateProvider, $urlRouterProvider, $locationProvider, $mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('deep-purple', {
