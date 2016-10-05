@@ -30,6 +30,6 @@ describe('test',function(){
 
 
    it('should fail if the there is no data',function(){
-     expect(scope.business.length).toBeGreaterThan(0);
+     expect(scope.business.length).not.toBeGreaterThan(0);
    })
 });
