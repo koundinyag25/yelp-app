@@ -1,6 +1,6 @@
 
-angular.module('myApp').controller("HomeCtrl", ['$scope', '$http', '$rootScope', 'myAppServices', 'leafletData', 'nemSimpleLogger',
-    function($scope, $http, $rootScope, myAppServices, leafletData, $timeout) {
+angular.module('myApp').controller("HomeCtrl", ['$scope', '$http', '$rootScope', 'myAppServices', 'leafletData', 'nemSimpleLogger','geolocation',
+    function($scope, $http, $rootScope, myAppServices, leafletData, $timeout,geolocation) {
         $scope.title = "yelp-based-app";
         $scope.business = [];
         $scope.categoryList = [{
