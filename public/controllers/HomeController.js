@@ -57,7 +57,7 @@ angular.module('myApp').controller("HomeCtrl", ['$scope', '$http', '$rootScope',
 
         $scope.search = function() {
             myAppServices.search($scope.search.keyword, $scope.search.location).then(function(data) {
-                $scope.business.push(data.data.businesses);
+                $scope.business = data.data.businesses;
                 $scope.name = $scope.business[0].name;
                 $scope.address = $scope.business[0].location.display_address[0] + ',' + $scope.business[0].location.display_address[1];
                 $scope.image = $scope.business[0].image_url;
