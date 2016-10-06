@@ -23,8 +23,12 @@ describe('test',function(){
 
 
 
-   it('should search for the keywords ',function () {
-    expect(scope.name).not.toBeNull();
+   it('on click it should return array of arrays',function () {
+     expect(scope.business.length).toBe(0);
+     scope.business= [ {name: 'starbucks'} ,{ name : 'Yelp'}];
+     //scope.search();
+    expect(scope.business.length).not.toBe(0);
+
    });
 
 
